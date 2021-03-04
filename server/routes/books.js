@@ -152,7 +152,7 @@ router.get('/delete/:id', (req, res, next) => {
       }
       else
       {
-          //refresh the business content list
+          //refresh the book list
           res.redirect('/books');
       }
   });
