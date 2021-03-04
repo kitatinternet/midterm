@@ -27,8 +27,17 @@ router.get('/', (req, res, next) => {
 router.get('/add', (req, res, next) => {
 
     /*****************
-     * ADD CODE HERE *
+     * ADD CODE HERE, edited 202003031925 *
      *****************/
+    let emptyBooks = book({
+      "Title":"",
+      "Description":"",
+      "Price":0.0,
+      "Author":"",
+      "Genre":""
+  });
+    res.render('books/details', {title:'Add a Book ',
+    books: emptyBooks});
 
 });
 
@@ -36,8 +45,28 @@ router.get('/add', (req, res, next) => {
 router.post('/add', (req, res, next) => {
 
     /*****************
-     * ADD CODE HERE *
+     * ADD CODE HERE, edited 202003031931 *
      *****************/
+    let newBook = book({
+      "Title":req.body.title,
+      "Description":"",
+      "Price":req.body.price,
+      "Author":req.body.author,
+      "Genre":req.body.genre
+  });
+
+  book.create(newBook,(err, book) => {
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          //refresh the business content list
+          res.redirect('/books');
+      }
+  });
 
 });
 
